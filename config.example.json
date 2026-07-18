@@ -1,0 +1,10 @@
+{
+  "preset": "safe",
+  "limit": 10,
+  "project": "",
+  "query": "",
+  "since": "",
+  "max_chars_per_message": 6000,
+  "include_tool_content": false,
+  "no_redact": false
+}

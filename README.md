@@ -64,6 +64,18 @@ python .\scripts\export_claude_code_conversations.py --since 2026-07-01 --limit 
 
 ## Opcoes Uteis
 
+Exportar tudo bruto, sem redacao, com tool results completos e sem corte por mensagem:
+
+```powershell
+python .\scripts\export_claude_code_conversations.py --all --limit 10
+```
+
+Mesmo modo, escrito de forma explicita:
+
+```powershell
+python .\scripts\export_claude_code_conversations.py --preset full --limit 10
+```
+
 Definir pasta de saida:
 
 ```powershell
@@ -82,6 +94,33 @@ Desativar redacao automatica:
 python .\scripts\export_claude_code_conversations.py --no-redact --limit 1
 ```
 
+Sem limite de tamanho por mensagem:
+
+```powershell
+python .\scripts\export_claude_code_conversations.py --max-chars-per-message 0 --limit 1
+```
+
+Usar arquivo de configuracao:
+
+```powershell
+python .\scripts\export_claude_code_conversations.py --config .\config.example.json
+```
+
+Exemplo de config:
+
+```json
+{
+  "preset": "full",
+  "limit": 50,
+  "project": "",
+  "query": "",
+  "since": "",
+  "max_chars_per_message": 0,
+  "include_tool_content": true,
+  "no_redact": true
+}
+```
+
 ## Uso Como Skill Codex
 
 Clone direto na pasta de skills do Codex:
@@ -96,15 +135,17 @@ Depois peça ao Codex:
 Use a skill exportador-conversas-claude-code-desktop para exportar as conversas recentes do Claude Code Desktop.
 ```
 
-## Seguranca
+## Modos De Exportacao
 
-Por padrao, o exportador:
+Por padrao, o exportador usa modo seguro:
 
 - redige padroes comuns de tokens, senhas, API keys e Authorization headers;
 - omite conteudo volumoso de `tool_result`;
 - preserva caminho do JSONL original para auditoria local.
 
-Use `--include-tool-content` somente quando precisar depurar uma conversa especifica.
+Quando quiser tudo, use `--all` ou `--preset full`.
+
+Atencao: modo full pode exportar credenciais, paths locais, comandos completos e saidas grandes. Use em pasta privada.
 
 ## Licenca
 

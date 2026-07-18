@@ -2,4 +2,5 @@ __pycache__/
 *.pyc
 claude-code-conversation-export/
 _tmp_claude_export_test/
+_tmp_export_*/
 *.log

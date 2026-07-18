@@ -53,16 +53,49 @@ def parse_args() -> argparse.Namespace:
     default_input = home / ".claude" / "projects"
     default_output = Path.cwd() / "claude-code-conversation-export" / datetime.now().strftime("%Y%m%d-%H%M%S")
     parser = argparse.ArgumentParser(description="Export Claude Code Desktop JSONL conversations.")
+    parser.add_argument("--config", default="", help="Optional JSON config file. CLI args override config values.")
+    parser.add_argument("--preset", choices=["safe", "full"], default="", help="safe: redact/omit/trim. full: no redact/include tool content/no trim.")
+    parser.add_argument("--all", action="store_true", help="Shortcut for --preset full.")
     parser.add_argument("--input", default=str(default_input), help="Claude projects directory. Default: ~/.claude/projects")
     parser.add_argument("--output", default=str(default_output), help="Output directory.")
     parser.add_argument("--limit", type=int, default=10, help="Max conversations to export after filtering.")
     parser.add_argument("--project", default="", help="Filter by project folder/path substring.")
     parser.add_argument("--query", default="", help="Filter by text contained in exported turns.")
     parser.add_argument("--since", default="", help="Filter files modified on/after YYYY-MM-DD.")
-    parser.add_argument("--max-chars-per-message", type=int, default=6000, help="Trim each message to this size.")
+    parser.add_argument("--max-chars-per-message", type=int, default=6000, help="Trim each message to this size. Use 0 for no trim.")
     parser.add_argument("--include-tool-content", action="store_true", help="Include tool_result/tool content instead of summaries.")
     parser.add_argument("--no-redact", action="store_true", help="Disable secret redaction.")
-    return parser.parse_args()
+    args = parser.parse_args()
+    return apply_config(args, parser)
+
+
+def apply_config(args: argparse.Namespace, parser: argparse.ArgumentParser) -> argparse.Namespace:
+    defaults = parser.parse_args([])
+    config: dict[str, Any] = {}
+    if args.config:
+        config_path = Path(os.path.expandvars(os.path.expanduser(args.config)))
+        with config_path.open("r", encoding="utf-8") as handle:
+            config = json.load(handle)
+
+    for key, value in config.items():
+        attr = key.replace("-", "_")
+        if not hasattr(args, attr):
+            continue
+        if getattr(args, attr) == getattr(defaults, attr):
+            setattr(args, attr, value)
+
+    if args.all:
+        args.preset = "full"
+    if args.preset == "full":
+        args.include_tool_content = True
+        args.no_redact = True
+        args.max_chars_per_message = 0
+    elif args.preset == "safe":
+        args.include_tool_content = False
+        args.no_redact = False
+        if args.max_chars_per_message == 0:
+            args.max_chars_per_message = 6000
+    return args
 
 
 def redact(text: str) -> str:
@@ -175,7 +208,7 @@ def load_conversation(path: Path, include_tool_content: bool, max_chars: int, sh
             text = turn.text
             if should_redact:
                 text = redact(text)
-            if len(text) > max_chars:
+            if max_chars > 0 and len(text) > max_chars:
                 text = text[:max_chars].rstrip() + "\n[TRUNCATED]"
             turn.text = text
             conv.turns.append(turn)
