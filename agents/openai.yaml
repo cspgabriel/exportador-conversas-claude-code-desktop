@@ -1,0 +1,3 @@
+display_name: Exportador Conversas Claude Code Desktop
+short_description: Exporta chats Claude Code em Markdown.
+default_prompt: Exporte as conversas recentes do Claude Code Desktop para eu continuar no Codex.
