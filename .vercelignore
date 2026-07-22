@@ -1,0 +1,7 @@
+.git
+.vercel
+exports
+claude-code-conversation-export
+__pycache__
+*.pyc
+_tmp_*

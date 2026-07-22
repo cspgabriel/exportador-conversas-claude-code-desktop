@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10110f" />
+    <meta
+      name="description"
+      content="Exporte conversas do Claude Code Desktop para Markdown e JSON. Recupere contexto, audite decisões e continue o trabalho em qualquer agente."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Claude Code Export — contexto que continua" />
+    <meta
+      property="og:description"
+      content="Transforme o histórico local do Claude Code em um pacote legível, portátil e pronto para continuar."
+    />
+    <title>Claude Code Export — contexto que continua</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="site-header" data-reveal>
+      <a class="brand" href="#topo" aria-label="Claude Code Export — início">
+        <span class="brand-mark" aria-hidden="true">C/</span>
+        <span>CLAUDE CODE EXPORT</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#instalar">Instalar</a>
+      </nav>
+      <a
+        class="header-cta"
+        href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop"
+        target="_blank"
+        rel="noreferrer"
+      >GitHub <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="conteudo">
+      <section class="hero" id="topo">
+        <div class="hero-copy">
+          <div class="eyebrow" data-reveal>
+            <span class="status-dot" aria-hidden="true"></span>
+            Open source · MIT · roda localmente
+          </div>
+          <h1 aria-label="Seu contexto não deveria evaporar">
+            <span class="hero-line" data-hero-line>Seu contexto</span>
+            <span class="hero-line hero-line-accent" data-hero-line>não deveria</span>
+            <span class="hero-line" data-hero-line>evaporar.</span>
+          </h1>
+          <div class="hero-bottom" data-reveal>
+            <p>
+              Transforme o histórico local do Claude Code em Markdown e JSON —
+              legível, pesquisável e pronto para continuar em qualquer agente.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button button-primary"
+                href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop"
+                target="_blank"
+                rel="noreferrer"
+              >Baixar no GitHub <span aria-hidden="true">↗</span></a>
+              <button class="button button-ghost" type="button" data-copy="gh repo clone cspgabriel/exportador-conversas-claude-code-desktop">
+                <span data-copy-label>Copiar comando</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="terminal-wrap" data-reveal aria-label="Demonstração do exportador">
+          <div class="terminal-orbit orbit-one" aria-hidden="true"></div>
+          <div class="terminal-orbit orbit-two" aria-hidden="true"></div>
+          <div class="terminal">
+            <div class="terminal-bar">
+              <div class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span>claude-export — powershell</span>
+              <span>LOCAL</span>
+            </div>
+            <div class="terminal-body">
+              <p><span class="prompt">PS&gt;</span> python .\scripts\export_<br />claude_code_conversations.py <span class="flag">--limit 10</span></p>
+              <div class="terminal-progress" aria-hidden="true"><span></span></div>
+              <p class="terminal-muted">Lendo ~/.claude/projects/*/*.jsonl</p>
+              <p class="terminal-success">✓ 10 conversas exportadas</p>
+              <div class="file-tree">
+                <span>claude-code-conversation-export/</span>
+                <span>├── <b>CONTINUAR-NO-CODEX.md</b></span>
+                <span>├── index.md</span>
+                <span>├── index.json</span>
+                <span>└── conversations/*.md</span>
+              </div>
+              <div class="terminal-cursor" aria-hidden="true"></div>
+            </div>
+          </div>
+          <div class="terminal-note note-top">SEM CLOUD</div>
+          <div class="terminal-note note-bottom">SEU HISTÓRICO → SEU CONTEXTO</div>
+        </div>
+      </section>
+
+      <div class="ticker" aria-label="Principais características">
+        <div class="ticker-track">
+          <span>JSONL → MARKDOWN</span><i></i><span>REDAÇÃO DE SEGREDOS</span><i></i><span>100% LOCAL</span><i></i><span>HANDOFF PRONTO</span><i></i><span>JSONL → MARKDOWN</span><i></i><span>REDAÇÃO DE SEGREDOS</span><i></i><span>100% LOCAL</span><i></i><span>HANDOFF PRONTO</span>
+        </div>
+      </div>
+
+      <section class="problem section-shell">
+        <div class="section-index" data-reveal>01 / O PROBLEMA</div>
+        <div class="problem-grid">
+          <h2 data-reveal>O histórico existe.<br /><em>Só não está legível.</em></h2>
+          <div class="problem-copy" data-reveal>
+            <p>
+              O Claude Code grava cada sessão em arquivos JSONL locais. Eles guardam
+              decisões, comandos, caminhos e contexto — mas foram feitos para a máquina,
+              não para você.
+            </p>
+            <p>
+              O exportador transforma esse rastro técnico em um pacote humano, navegável
+              e portátil. Sem colar conversa por conversa. Sem recomeçar do zero.
+            </p>
+          </div>
+        </div>
+        <div class="contrast-strip" data-reveal>
+          <div><span>ANTES</span><strong>JSONL fragmentado</strong><small>difícil de ler e reutilizar</small></div>
+          <div class="contrast-arrow" aria-hidden="true">→</div>
+          <div><span>DEPOIS</span><strong>Contexto estruturado</strong><small>pronto para busca e handoff</small></div>
+        </div>
+      </section>
+
+      <section class="workflow section-shell" id="como-funciona">
+        <div class="section-index" data-reveal>02 / COMO FUNCIONA</div>
+        <div class="section-heading" data-reveal>
+          <h2>Três passos.<br />Contexto recuperado.</h2>
+          <p>O caminho curto entre “onde paramos?” e “pode continuar”.</p>
+        </div>
+        <ol class="steps">
+          <li data-reveal>
+            <span class="step-number">01</span>
+            <div class="step-icon" aria-hidden="true"><span class="scan-lines"></span></div>
+            <h3>Encontra</h3>
+            <p>Lê automaticamente as sessões em <code>~/.claude/projects</code>.</p>
+          </li>
+          <li data-reveal>
+            <span class="step-number">02</span>
+            <div class="step-icon step-transform" aria-hidden="true"><i>JSONL</i><b>MD</b></div>
+            <h3>Transforma</h3>
+            <p>Organiza mensagens, decisões e ferramentas em Markdown e JSON.</p>
+          </li>
+          <li data-reveal>
+            <span class="step-number">03</span>
+            <div class="step-icon step-continue" aria-hidden="true"><span>→</span></div>
+            <h3>Continua</h3>
+            <p>Gera um handoff compacto para Codex, editores ou qualquer agente.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="features section-shell" id="recursos">
+        <div class="section-index light" data-reveal>03 / FEITO PARA TRABALHO REAL</div>
+        <div class="features-heading" data-reveal>
+          <h2>Menos arqueologia.<br /><span>Mais continuidade.</span></h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature feature-wide" data-reveal>
+            <span class="feature-code">SAFE / 01</span>
+            <div class="redaction-demo" aria-hidden="true">
+              <span>API_KEY=</span><b>████████████</b><i>redigido</i>
+            </div>
+            <h3>Seguro por padrão</h3>
+            <p>Redige tokens, senhas, chaves e headers de autorização antes da exportação.</p>
+          </article>
+          <article class="feature" data-reveal>
+            <span class="feature-code">FILTER / 02</span>
+            <div class="filter-stack" aria-hidden="true"><span>--since</span><span>--project</span><span>--query</span></div>
+            <h3>Filtro cirúrgico</h3>
+            <p>Recorte por data, projeto, busca textual ou quantidade de sessões.</p>
+          </article>
+          <article class="feature" data-reveal>
+            <span class="feature-code">PORTABLE / 03</span>
+            <div class="format-pills" aria-hidden="true"><span>.MD</span><span>.JSON</span></div>
+            <h3>Formato aberto</h3>
+            <p>Arquivos simples, versionáveis e fáceis de abrir em qualquer editor.</p>
+          </article>
+          <article class="feature feature-wide feature-accent" data-reveal>
+            <span class="feature-code">CONTROL / 04</span>
+            <div class="local-mark" aria-hidden="true">LOCAL<span>ONLY</span></div>
+            <h3>Seus dados ficam no seu computador</h3>
+            <p>O script lê e escreve localmente. Nenhum upload obrigatório, nenhum banco externo.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="use-cases section-shell">
+        <div class="section-index" data-reveal>04 / ONDE ELE ENTRA</div>
+        <div class="use-case-list">
+          <article data-reveal><span>01</span><h3>Retomar uma tarefa interrompida</h3><p>Reconstrua o último estado, pedidos e arquivos sem depender da memória da sessão.</p></article>
+          <article data-reveal><span>02</span><h3>Trocar de agente sem perder contexto</h3><p>Leve o handoff para Codex, outro editor ou um fluxo interno de auditoria.</p></article>
+          <article data-reveal><span>03</span><h3>Auditar decisões e comandos</h3><p>Encontre o que foi pedido, executado e deixado pendente em cada conversa.</p></article>
+        </div>
+      </section>
+
+      <section class="install section-shell" id="instalar">
+        <div class="install-glow" aria-hidden="true"></div>
+        <div class="section-index light" data-reveal>05 / INSTALE AGORA</div>
+        <div class="install-grid">
+          <div data-reveal>
+            <h2>Seu próximo handoff<br />começa com uma linha.</h2>
+            <p>Python 3.10+ · Windows, macOS e Linux · licença MIT</p>
+          </div>
+          <div class="command-card" data-reveal>
+            <div class="command-tabs"><span>GH CLI</span><span>POWERSHELL</span></div>
+            <code><span>gh repo clone</span> cspgabriel/<br />exportador-conversas-claude-code-desktop</code>
+            <button type="button" data-copy="gh repo clone cspgabriel/exportador-conversas-claude-code-desktop"><span data-copy-label>Copiar</span></button>
+          </div>
+        </div>
+        <div class="install-actions" data-reveal>
+          <a class="button button-light" href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop" target="_blank" rel="noreferrer">Abrir repositório <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop#uso-rapido" target="_blank" rel="noreferrer">Ler documentação</a>
+        </div>
+      </section>
+
+      <section class="faq section-shell">
+        <div class="section-index" data-reveal>06 / PERGUNTAS RÁPIDAS</div>
+        <div class="faq-grid">
+          <h2 data-reveal>Antes de<br />executar.</h2>
+          <div class="faq-list">
+            <details data-reveal><summary>Ele envia minhas conversas para algum servidor?<span>+</span></summary><p>Não. A leitura e a geração dos arquivos acontecem localmente no seu computador.</p></details>
+            <details data-reveal><summary>Consigo exportar só as conversas de hoje?<span>+</span></summary><p>Sim. Use <code>--since AAAA-MM-DD</code> e combine com projeto, busca ou limite.</p></details>
+            <details data-reveal><summary>Posso incluir o conteúdo completo das ferramentas?<span>+</span></summary><p>Sim. O preset <code>full</code> inclui resultados completos, sem redação e sem corte — use apenas em pasta privada.</p></details>
+            <details data-reveal><summary>Funciona como skill do Codex?<span>+</span></summary><p>Sim. O repositório inclui um <code>SKILL.md</code> pronto para instalação na pasta de skills.</p></details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#topo"><span class="brand-mark">C/</span><span>CLAUDE CODE EXPORT</span></a>
+      <p>Contexto local. Continuidade real.</p>
+      <div><span>MIT · <b data-year>2026</b></span><a href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </footer>
+  </body>
+</html>
