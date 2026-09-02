@@ -3,152 +3,63 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Exporte conversas locais do Claude Code para um handoff legível e pesquisável." />
-    <title>Claude Code Export — contexto que continua</title>
+    <meta name="description" content="Uma rota de contexto: do JSONL bruto a um handoff que outro agente consegue continuar." />
+    <title>Claude Code Export — não recomece do zero</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css?v=editorial-2" />
     <script defer src="./app.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <header class="site-header">
-      <a class="brand" href="#topo" aria-label="Claude Code Export, início">
-        <span class="brand-mark" aria-hidden="true">CC</span>
-        <span>Claude Code Export</span>
-      </a>
-      <nav aria-label="Navegação principal">
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#o-que-gera">O que gera</a>
-        <a href="#instalar">Instalar</a>
-      </nav>
-      <a class="header-link" href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    <header class="topline">
+      <a class="wordmark" href="#inicio"><span aria-hidden="true">[CC]</span> EXPORTADOR DE CONVERSAS</a>
+      <p>LOCAL / PORTÁTIL / OPEN SOURCE</p>
+      <a href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop" target="_blank" rel="noreferrer">REPOSITÓRIO <span aria-hidden="true">↗</span></a>
     </header>
-
     <main id="conteudo">
-      <section class="hero" id="topo" aria-labelledby="hero-title">
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span aria-hidden="true"></span> Conversas locais, contexto portátil</p>
-          <h1 id="hero-title">Seu histórico não precisa terminar em um arquivo <em>JSONL.</em></h1>
-          <p class="hero-summary">Transforme sessões do Claude Code em um pacote claro para pesquisar, auditar e continuar em outro agente ou editor.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#instalar">Começar a exportar <span aria-hidden="true">↓</span></a>
-            <a class="button button-secondary" href="#como-funciona">Ver o fluxo <span aria-hidden="true">→</span></a>
+      <aside class="chapter-index" aria-label="Capítulos da página">
+        <a class="index-item is-active" href="#inicio"><span>00</span> PONTO DE PARTIDA</a>
+        <a class="index-item" href="#transformacao"><span>01</span> TRANSFORMAÇÃO</a>
+        <a class="index-item" href="#material"><span>02</span> MATERIAL GERADO</a>
+        <a class="index-item" href="#continuar"><span>03</span> CONTINUAR</a>
+      </aside>
+      <div class="story">
+        <section class="opening" id="inicio" aria-labelledby="opening-title">
+          <p class="eyebrow">ARQUIVO NÃO É CONTEXTO</p>
+          <h1 id="opening-title">PARE DE<br /><span>RECOMEÇAR</span><br />CADA SESSÃO.</h1>
+          <div class="opening-note">
+            <p>Quando uma conversa acaba, o trabalho não deveria voltar para o início. Exporte o histórico local e entregue ao próximo agente uma linha de continuidade.</p>
+            <a class="signal-link" href="#continuar">VER COMO CONTINUAR <span aria-hidden="true">↓</span></a>
           </div>
-          <ul class="trust-list" aria-label="Características do exportador">
-            <li>Executa no seu computador</li>
-            <li>Sem conta adicional</li>
-            <li>Open source</li>
-          </ul>
-        </div>
-
-        <div class="terminal-wrap reveal" aria-label="Exemplo de exportação do Claude Code">
-          <div class="terminal-topbar">
-            <span class="terminal-label"><span class="status-dot" aria-hidden="true"></span> exportador local</span>
-            <span class="terminal-path">~/projetos</span>
+          <div class="raw-stamp" aria-label="Origem dos dados: arquivos JSONL locais"><span>ORIGEM</span><strong>~/.claude/projects/<br />*.jsonl</strong></div>
+        </section>
+        <section class="transform" id="transformacao" aria-labelledby="transform-title">
+          <div class="chapter-heading"><p class="chapter-no">01 / A TRANSFORMAÇÃO</p><h2 id="transform-title">Não é mais uma conversa presa em um log.</h2></div>
+          <div class="conversion-track" aria-label="Etapas de transformação do contexto">
+            <article class="track-row raw"><p class="track-code">A</p><div><p class="track-label">ANTES</p><h3>JSONL bruto</h3><p>Eventos, mensagens e chamadas misturados num formato feito para máquina.</p></div><p class="track-tag">DIFÍCIL DE RETOMAR</p></article>
+            <article class="track-row process"><p class="track-code">→</p><div><p class="track-label">O EXPORTADOR</p><h3>Lê, filtra e organiza</h3><p>Escolha projeto, termo ou período. A ferramenta reúne o que interessa no recorte certo.</p></div><p class="track-tag">RODA LOCALMENTE</p></article>
+            <article class="track-row result"><p class="track-code">B</p><div><p class="track-label">DEPOIS</p><h3>Contexto continuável</h3><p>Uma coleção legível, estruturada e pronta para informar a próxima decisão.</p></div><p class="track-tag">PRONTO PARA HANDOFF</p></article>
           </div>
-          <div class="terminal-body">
-            <p><span class="prompt">$</span> python scripts/export_claude_code_conversations.py <span class="flag">--limit 10</span></p>
-            <p class="terminal-muted">Lendo sessões em ~/.claude/projects/</p>
-            <div class="terminal-result">
-              <p><span class="success">✓</span> index.md <span>índice legível</span></p>
-              <p><span class="success">✓</span> index.json <span>dados estruturados</span></p>
-              <p><span class="success">✓</span> CONTINUAR-NO-CODEX.md <span>próximo handoff</span></p>
-              <p><span class="success">✓</span> conversations/ <span>conversas em Markdown</span></p>
-            </div>
-            <p class="terminal-ready"><span class="prompt">$</span> contexto pronto para continuar<span class="cursor" aria-hidden="true"></span></p>
+        </section>
+        <section class="manifest" id="material" aria-labelledby="manifest-title">
+          <div class="chapter-heading"><p class="chapter-no">02 / O QUE SOBRA</p><h2 id="manifest-title">Quatro arquivos. Uma memória de trabalho.</h2></div>
+          <div class="manifest-list">
+            <details open><summary><span class="file-no">01</span><strong>index.md</strong><span class="file-role">mapa de leitura</span></summary><p>Um índice navegável para encontrar a conversa certa antes de abrir qualquer arquivo.</p></details>
+            <details><summary><span class="file-no">02</span><strong>index.json</strong><span class="file-role">estrutura reutilizável</span></summary><p>Metadados em formato estruturado para fluxos de automação ou auditoria.</p></details>
+            <details><summary><span class="file-no">03</span><strong>CONTINUAR-NO-CODEX.md</strong><span class="file-role">ponte de contexto</span></summary><p>Um ponto de partida explícito para o próximo ambiente de trabalho.</p></details>
+            <details><summary><span class="file-no">04</span><strong>conversations/</strong><span class="file-role">histórico legível</span></summary><p>Uma conversa por arquivo Markdown, pronta para consulta no seu ritmo.</p></details>
           </div>
-        </div>
-      </section>
-
-      <section class="statement reveal" aria-labelledby="statement-title">
-        <p class="section-kicker">Quando uma sessão cresce, o contexto se perde.</p>
-        <h2 id="statement-title">O exportador organiza a conversa para que o próximo passo comece com entendimento, não com adivinhação.</h2>
-      </section>
-
-      <section class="workflow" id="como-funciona" aria-labelledby="workflow-title">
-        <div class="section-heading reveal">
-          <p class="section-kicker">Fluxo direto</p>
-          <h2 id="workflow-title">De sessão local a handoff útil em três passos.</h2>
-        </div>
-        <ol class="steps">
-          <li class="step reveal">
-            <span class="step-number">01</span>
-            <div>
-              <h3>Encontre as sessões</h3>
-              <p>O script lê os arquivos JSONL salvos pelo Claude Code em <code>~/.claude/projects/</code>.</p>
-            </div>
-          </li>
-          <li class="step reveal">
-            <span class="step-number">02</span>
-            <div>
-              <h3>Escolha o recorte</h3>
-              <p>Filtre por projeto, termo ou data para levar apenas o contexto que importa.</p>
-            </div>
-          </li>
-          <li class="step reveal">
-            <span class="step-number">03</span>
-            <div>
-              <h3>Continue com clareza</h3>
-              <p>Receba Markdown, índice estruturado e um arquivo de handoff pronto para o próximo ambiente.</p>
-            </div>
-          </li>
-        </ol>
-      </section>
-
-      <section class="outputs" id="o-que-gera" aria-labelledby="outputs-title">
-        <div class="section-heading reveal">
-          <p class="section-kicker">O pacote de saída</p>
-          <h2 id="outputs-title">Formato para ler agora. Estrutura para reutilizar depois.</h2>
-        </div>
-        <div class="output-grid">
-          <article class="output-card reveal">
-            <span class="file-type">MD</span>
-            <h3>index.md</h3>
-            <p>Uma visão navegável das conversas exportadas.</p>
-          </article>
-          <article class="output-card reveal">
-            <span class="file-type">JSON</span>
-            <h3>index.json</h3>
-            <p>Metadados estruturados para automações ou auditoria.</p>
-          </article>
-          <article class="output-card reveal">
-            <span class="file-type">MD</span>
-            <h3>CONTINUAR-NO-CODEX.md</h3>
-            <p>Um ponto de partida explícito para retomar o trabalho.</p>
-          </article>
-          <article class="output-card reveal">
-            <span class="file-type">MD</span>
-            <h3>conversations/</h3>
-            <p>Uma conversa por arquivo, pronta para consulta.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="install" id="instalar" aria-labelledby="install-title">
-        <div class="install-intro reveal">
-          <p class="section-kicker">Comece localmente</p>
-          <h2 id="install-title">Uma linha para recuperar o que ficou para trás.</h2>
-          <p>Clone o repositório e rode o exportador no diretório que já guarda suas sessões do Claude Code.</p>
-        </div>
-        <div class="command-card reveal">
-          <div class="command-label">PowerShell</div>
-          <code id="install-command">git clone https://github.com/cspgabriel/exportador-conversas-claude-code-desktop.git</code>
-          <button class="copy-button" type="button" data-copy-target="install-command" aria-label="Copiar comando de instalação">Copiar</button>
-          <p class="copy-status" role="status" aria-live="polite"></p>
-        </div>
-        <div class="install-actions reveal">
-          <a class="button button-primary" href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop" target="_blank" rel="noreferrer">Abrir repositório <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href="../">Ver landing original <span aria-hidden="true">←</span></a>
-        </div>
-      </section>
+        </section>
+        <section class="handoff" id="continuar" aria-labelledby="handoff-title">
+          <p class="chapter-no">03 / A PRÓXIMA LINHA</p><h2 id="handoff-title">O próximo agente não precisa adivinhar o que veio antes.</h2>
+          <p class="handoff-copy">Comece pelo seu histórico local. Sem upload obrigatório. Sem conta adicional. Só contexto transformado em material de trabalho.</p>
+          <div class="command-shell"><div class="command-meta"><span>POWERSHELL</span><span>COMANDO DE INÍCIO</span></div><code id="clone-command">git clone https://github.com/cspgabriel/exportador-conversas-claude-code-desktop.git</code><button type="button" data-copy-target="clone-command">COPIAR COMANDO</button><p class="copy-status" role="status" aria-live="polite"></p></div>
+          <div class="handoff-actions"><a class="run-link" href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop" target="_blank" rel="noreferrer">ABRIR O EXPORTADOR <span aria-hidden="true">↗</span></a><a class="back-link" href="../">VER LANDING ORIGINAL <span aria-hidden="true">←</span></a></div>
+        </section>
+      </div>
     </main>
-
-    <footer>
-      <a class="brand" href="#topo"><span class="brand-mark" aria-hidden="true">CC</span><span>Claude Code Export</span></a>
-      <p>Uma ferramenta open source para dar continuidade ao seu contexto.</p>
-      <a href="https://github.com/cspgabriel/exportador-conversas-claude-code-desktop" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-    </footer>
+    <footer><span>[CC] EXPORTADOR DE CONVERSAS</span><span>O contexto continua.</span></footer>
   </body>
 </html>
